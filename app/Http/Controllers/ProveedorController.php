@@ -14,7 +14,9 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+        $proveedores = Proveedor::all();
+
+        return view('proveedor/proveedorIndex', compact('proveedores'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+        return view('proveedor/proveedorCreate');
     }
 
     /**
@@ -35,7 +37,17 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|min:3|max:255',
+            'correo' => 'required|email',
+            'telefono' => 'required|min:10|max:10',
+            'direccion' => 'required|min:10|max:255',
+            'responsable' => 'max:255',
+        ]);
+
+        Proveedor::create($request->all());
+
+        return redirect('/proveedor');
     }
 
     /**
@@ -46,7 +58,7 @@ class ProveedorController extends Controller
      */
     public function show(Proveedor $proveedor)
     {
-        //
+        return view('proveedor/proveedorShow', compact('proveedor'));
     }
 
     /**
@@ -57,7 +69,7 @@ class ProveedorController extends Controller
      */
     public function edit(Proveedor $proveedor)
     {
-        //
+        return view('proveedor/proveedorEdit', compact('proveedor'));
     }
 
     /**
@@ -69,7 +81,17 @@ class ProveedorController extends Controller
      */
     public function update(Request $request, Proveedor $proveedor)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|min:3|max:255',
+            'correo' => 'required|email',
+            'telefono' => 'required|min:10|max:10',
+            'direccion' => 'required|min:10|max:255',
+            'responsable' => 'max:255',
+        ]);
+
+        Proveedor::where('id', $proveedor->id)->update($request->except('_token', '_method'));
+
+        return redirect('/proveedor');
     }
 
     /**
@@ -80,6 +102,8 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedor)
     {
-        //
+        $proveedor->delete();
+
+        return redirect('/proveedor');
     }
 }
