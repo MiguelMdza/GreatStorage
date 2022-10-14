@@ -18,4 +18,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/landing', function () {
+    return view('landing');
+});
+
+
 Route::resource('producto', ProductoController::class);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
