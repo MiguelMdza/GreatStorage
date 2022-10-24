@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Proveedor</title>
-</head>
-<body>
-    <h1>Editar Proveedor</h1>
-
+<x-plantilla titulo="Editar Proveedor" tab="Editar Proveedor">
     <a href="/proveedor/">Mostrar Proveedores</a>
     
     <form action="/proveedor/{{ $proveedor->id }}" method="POST">
@@ -48,5 +38,4 @@
 
         <input type="submit" value="Editar">
     </form>
-</body>
-</html>
+</x-plantilla>
