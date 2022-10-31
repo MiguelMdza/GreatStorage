@@ -14,6 +14,7 @@ class Plantilla extends Component
      *
      * @return void
      */
+
     public function __construct($titulo = 'Página', $tab = 'Pestaña')
     {
         $this->titulo = $titulo;
@@ -27,6 +28,7 @@ class Plantilla extends Component
      */
     public function render()
     {
+
         return view('components/plantilla');
     }
 }
