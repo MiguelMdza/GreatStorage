@@ -6,18 +6,19 @@ use Illuminate\View\Component;
 
 class Plantilla extends Component
 {
-    public $tab;
     public $titulo;
+    public $tab;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($tab = 'Pestaña', $titulo = 'Página')
+
+    public function __construct($titulo = 'Página', $tab = 'Pestaña')
     {
-        $this->tab = $tab;
         $this->titulo = $titulo;
+        $this->tab = $tab;
     }
 
     /**
@@ -27,6 +28,7 @@ class Plantilla extends Component
      */
     public function render()
     {
-        return view('components.plantilla');
+
+        return view('components/plantilla');
     }
 }
