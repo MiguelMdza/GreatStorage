@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\PedidoController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,14 +22,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/landing', function () {
-    return view('landing');
-});
 
+Route::resource('sucursal', SucursalController::class);
 
 Route::resource('producto', ProductoController::class);
 
-Route::resource('sucursal', SucursalController::class);
+Route::resource('proveedor', ProveedorController::class);
+
+Route::resource('pedido', PedidoController::class);
+
+Route::get('landing', function () {
+    return view('landing');
+});
 
 Route::middleware([
     'auth:sanctum',
