@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\SucursalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,8 @@ Route::get('/landing', function () {
 
 
 Route::resource('producto', ProductoController::class);
+
+Route::resource('sucursal', SucursalController::class);
 
 Route::middleware([
     'auth:sanctum',

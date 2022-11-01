@@ -1,4 +1,4 @@
-<x-plantilla titulo="Editar Producto">
+<x-plantilla tab="Editar Producto" titulo="Editar Producto">
     <form action="/producto/{{ $producto->id }}" method="post">
         @csrf
         @method('patch')
