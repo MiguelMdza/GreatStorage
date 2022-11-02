@@ -8,6 +8,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Precio</th>
+            <th>Proveedor</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
@@ -20,6 +21,7 @@
                 </td>
                 <td>{{ $producto->descripcion }}</td>
                 <td>{{ $producto->precio }}</td>
+                <td>{{ $producto->proveedor->nombre }}</td>
                 <td>
                     <a href="/producto/{{ $producto->id }}/edit">Editar</a>
                 </td>

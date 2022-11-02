@@ -24,8 +24,6 @@ Route::resource('producto', ProductoController::class);
 
 Route::resource('proveedor', ProveedorController::class);
 
-Route::resource('pedido', PedidoController::class);
-
 Route::get('landing', function () {
     return view('landing');
 });

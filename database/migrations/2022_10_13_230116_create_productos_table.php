@@ -15,6 +15,7 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('proveedor_id')->constrained()->onDelete('cascade');
             $table->string('nombre');
             $table->string('descripcion');
             $table->float('precio')->unsigned();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -15,7 +16,8 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        return view('producto.productoIndex', compact('productos'));
+        $proveedores = Proveedor::all();
+        return view('producto.productoIndex', compact('productos', 'proveedores'));
     }
 
     /**
@@ -25,7 +27,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('producto.productoCreate');
+        $proveedores = Proveedor::all();
+        return view('producto.productoCreate', compact('proveedores'));
     }
 
     /**
@@ -40,6 +43,7 @@ class ProductoController extends Controller
             'nombre' => 'required|max:255',
             'descripcion' => 'required|max:255',
             'precio' => 'required|numeric',
+            'proveedor_id' => 'required',
         ]);
 
         Producto::create($request->all());
@@ -66,7 +70,8 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        return view('producto.productoEdit', compact('producto'));
+        $proveedores = Proveedor::all();
+        return view('producto.productoEdit', compact('producto', 'proveedores'));
     }
 
     /**
