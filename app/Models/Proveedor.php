@@ -12,4 +12,10 @@ class Proveedor extends Model
     protected $fillable = ['nombre', 'correo', 'telefono', 'direccion', 'responsable'];
 
     public $timestamps = false; 
+
+    //Proveedor tiene muchos productos
+    public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
 }
