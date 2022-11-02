@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\SucursalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::resource('producto', ProductoController::class);
 
 Route::resource('proveedor', ProveedorController::class);
+
+Route::resource('sucursal', SucursalController::class);
 
 Route::get('landing', function () {
     return view('landing');
