@@ -20,16 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('producto', ProductoController::class);
-
-Route::resource('proveedor', ProveedorController::class);
-
-Route::resource('sucursal', SucursalController::class);
-
-Route::get('landing', function () {
-    return view('landing');
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -38,4 +28,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::resource('producto', ProductoController::class);
+    Route::resource('proveedor', ProveedorController::class);
+    Route::resource('sucursal', SucursalController::class);
 });

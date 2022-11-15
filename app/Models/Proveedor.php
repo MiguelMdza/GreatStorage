@@ -18,4 +18,11 @@ class Proveedor extends Model
     {
         return $this->hasMany(Producto::class);
     }
+
+    //Proveedor puede ir a muchas Sucursales
+    public function sucursales()
+    {
+        //belongsToMany es para relación M:N
+        return $this->belongsToMany(Sucursal::class);
+    }
 }
