@@ -17,8 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::middleware('web')->group(function () {
+    Route::get('/index', function () {
+        return view('index');
+    })->name('index');
+});    
 
 Route::middleware([
     'auth:sanctum',
