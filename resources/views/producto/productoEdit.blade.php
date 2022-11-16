@@ -35,7 +35,7 @@
                         <select class="form-control" name="proveedor_id" id="proveedor_id" required>
                             <option selected disabled>Elije una opción</option>
                             @foreach($proveedores as $proveedor)
-                                <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
+                                <option value="{{ $proveedor->id }}" {{ $producto->proveedor->id == $proveedor->id ? 'selected' : '' }}>{{ $proveedor->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
