@@ -1,6 +1,5 @@
 <x-plantilla titulo="GreatStorage - Proveedores" tab="GreatStorage - Proveedores">
     
-
     <div class="container-xl">
         <div class="table-responsive">
             <div class="table-wrapper">
