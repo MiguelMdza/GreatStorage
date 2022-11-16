@@ -1,4 +1,4 @@
-<x-plantilla tab="GreatStorage">
+<x-plantilla tab="GreatStorage - Inicio">
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">

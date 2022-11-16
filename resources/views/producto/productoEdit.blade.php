@@ -22,7 +22,7 @@
         @enderror
         <br>
         <label for="proveedor_id">Proveedor</label>
-        <select name="proveedor_id" id="proveedor_id" required>
+        <select class="browser-default" name="proveedor_id" id="proveedor_id" required>
             <option selected disabled>Elije una opción</option>
             @foreach($proveedores as $proveedor)
                 <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -12,21 +13,25 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/flaticon/font/flaticon.css') }}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}">
+    <script src="{{ asset('https://code.jquery.com/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js') }}"></script>
 </head>
 
 <body>
@@ -51,25 +56,24 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/index" class="nav-item nav-link">Inicio</a>
                             @if (Route::has('login'))
-                                @auth    
-                                    <a href="/producto" class="nav-item nav-link">Productos</a>
-                                    <a href="/proveedor" class="nav-item nav-link">Proveedores</a>
-                                    <a href="/sucursal" class="nav-item nav-link">Sucursales</a>
-                                    <a>
-                                        <form action="{{ route('logout') }}" method="POST" class="nav-item nav-link">
-                                            @csrf
-                                            <x-jet-dropdown-link href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); this.closest('form').submit();">
-                                                {{ __('Cerrar Sesión') }}
-                                            </x-jet-dropdown-link>
-                                        </form>
-                                    </a>
-                                @else
-                                    <a href="{{ route('login') }}" class="nav-item nav-link">Inicia Sesión</a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="nav-item nav-link">Regístrate</a>
-                                    @endif
-                                @endauth
+                            @auth
+                            <a href="/producto" class="nav-item nav-link">Productos</a>
+                            <a href="/proveedor" class="nav-item nav-link">Proveedores</a>
+                            <a href="/sucursal" class="nav-item nav-link">Sucursales</a>
+                            <a>
+                                <form action="{{ route('logout') }}" method="POST" class="nav-item nav-link">
+                                    @csrf
+                                    <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        {{ __('Cerrar Sesión') }}
+                                    </x-jet-dropdown-link>
+                                </form>
+                            </a>
+                            @else
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Inicia Sesión</a>
+                            @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="nav-item nav-link">Regístrate</a>
+                            @endif
+                            @endauth
                             @endif
                         </div>
                     </div>
@@ -92,4 +96,5 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
+
 </html>
