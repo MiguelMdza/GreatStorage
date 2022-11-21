@@ -10,42 +10,41 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nombre">Nombre</label>
+                        <label for="nombre"><b>Nombre</b></label>
                         <input class="form-control" type="text" name="nombre" id="nombre" required value="{{ old('nombre') ?? $sucursal->nombre }}">
                         @error('nombre')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="direccion">Dirección</label>
+                        <label for="direccion"><b>Dirección</b></label>
                         <input class="form-control" type="text" name="direccion" id="direccion" required value="{{ old('direccion') ?? $sucursal->direccion }}">
                         @error('direccion')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefono">Teléfono</label>
+                        <label for="telefono"><b>Teléfono</b></label>
                         <input class="form-control" type="text" name="telefono" id="telefono" required value="{{ old('telefono') ?? $sucursal->telefono }}">
                         @error('telefono')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="encargado">Encargado</label>
+                        <label for="encargado"><b>Encargado</b></label>
                         <input class="form-control" type="text" name="encargado" id="encargado" value="{{ old('encargado') ?? $sucursal->encargado }}">
                         @error('encargado')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="proveedor_id">Selecciona Proveedor(es)</label>
-                        <select class="form-control" name="proveedor_id[]" multiple required>
-                            @foreach($proveedores as $proveedor)
-                                <option value="{{ $proveedor->id }}" {{ array_search($proveedor->id, $sucursal->proveedores->pluck('id')->toArray()) !== false ? 'selected' : ''}}>
-                                    {{ $proveedor->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <label for="proveedor_id"><b>Selecciona Proveedor(es)</b></label>
+                        @foreach($proveedores as $proveedor)
+                            <br>
+                            <input type="checkbox" name="proveedor_id[]" value="{{ $proveedor->id }}" {{ array_search($proveedor->id, $sucursal->proveedores->pluck('id')->toArray()) !== false ? 'checked' : ''}}>
+                                {{ $proveedor->nombre }}
+                            </input>
+                        @endforeach
                         @error('proveedor_id')
                             <i>{{ $message }}</i>
                         @enderror

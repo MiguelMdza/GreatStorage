@@ -8,28 +8,28 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nombre">Nombre</label>
+                        <label for="nombre"><b>Nombre</b></label>
                         <input class="form-control" type="text" name="nombre" id="nombre" required value={{ $nombre ?? old('nombre') }}>
                         @error('nombre')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Descripción</label>
+                        <label for="descripcion"><b>Descripción</b></label>
                         <input class="form-control" type="text" name="descripcion" id="descripcion" required value={{ $descripcion ?? old('descripcion') }}>
                         @error('descripcion')
                             <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="precio">Precio</label>
+                        <label for="precio"><b>Precio</b></label>
                         <input class="form-control" type="number" step="0.01" name="precio" id="precio" required value={{ $precio ?? old('precio') }}>
                         @error('precio')
                             <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="proveedor_id">Proveedor</label>
+                        <label for="proveedor_id"><b>Proveedor</b></label>
                         <select class="form-control" name="proveedor_id" id="proveedor_id" required value={{ old('proveedor_id') }}>
                             <option selected disabled>Elije una opción</option>
                             @foreach($proveedores as $proveedor)

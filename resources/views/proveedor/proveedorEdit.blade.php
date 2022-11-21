@@ -10,35 +10,35 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nombre">Nombre</label>
+                        <label for="nombre"><b>Nombre</b></label>
                         <input class="form-control" type="text" name="nombre" id="nombre" required value="{{ old('nombre') ?? $proveedor->nombre }}">
                         @error('nombre')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="correo">Correo</label>
+                        <label for="correo"><b>Correo</b></label>
                         <input class="form-control" type="email" name="correo" id="correo" required value="{{ old('correo') ?? $proveedor->correo }}">
                         @error('correo')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefono">Teléfono</label>
+                        <label for="telefono"><b>Teléfono</b></label>
                         <input class="form-control" type="tel" name="telefono" id="telefono" required value="{{ old('telefono') ?? $proveedor->telefono }}">
                         @error('telefono')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="direccion">Dirección</label>
+                        <label for="direccion"><b>Dirección</b></label>
                         <input class="form-control" type="text" name="direccion" id="direccion" required value="{{ old('direccion') ?? $proveedor->direccion }}">
                         @error('direccion')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="responsable">Responsable</label>
+                        <label for="responsable"><b>Responsable</b></label>
                         <input class="form-control" type="text" name="responsable" id="responsable" value="{{ old('responsable') ?? $proveedor->responsable }}">
                         @error('responsable')
                         <i>{{ $message }}</i>
