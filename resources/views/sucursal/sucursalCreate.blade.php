@@ -9,29 +9,40 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input class="form-control" type="text" name="nombre" id="nombre">
+                        <input class="form-control" type="text" name="nombre" id="nombre" required value={{ $nombre ?? old('nombre') }}>
                         @error('nombre')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="direccion">Dirección</label>
-                        <input class="form-control" type="text" name="direccion" id="direccion">
+                        <input class="form-control" type="text" name="direccion" id="direccion" required value={{ $direccion ?? old('direccion') }}>
                         @error('direccion')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono</label>
-                        <input class="form-control" type="text" name="telefono" id="telefono">
+                        <input class="form-control" type="text" name="telefono" id="telefono" required value={{ $telefono ?? old('telefono') }}>
                         @error('telefono')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="encargado">Encargado</label>
-                        <input class="form-control" type="text" name="encargado" id="encargado">
+                        <input class="form-control" type="text" name="encargado" id="encargado" value={{ $encargado ?? old('encargado') }}>
                         @error('encargado')
+                        <i>{{ $message }}</i>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedor_id">Selecciona Proveedor(es)</label>
+                        <select class="form-control" name="proveedor_id[]" value={{ old('proveedor_id') }} multiple required>
+                            @foreach($proveedores as $proveedor)
+                                <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('proveedor_id')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>

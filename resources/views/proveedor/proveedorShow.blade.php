@@ -6,24 +6,32 @@
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
+                <label for="nombre"><b>Nombre</b></label>
                 <p>{{ $proveedor->nombre }}</p>
             </div>
             <div class="form-group">
-                <label for="correo">Correo</label>
+                <label for="correo"><b>Correo</b></label>
                 <p>{{ $proveedor->correo }}</p>
             </div>
             <div class="form-group">
-                <label for="telefono">Teléfono</label>
+                <label for="telefono"><b>Teléfono</b></label>
                 <p>{{ $proveedor->telefono }}</p>
             </div>
             <div class="form-group">
-                <label for="direccion">Dirección</label>
+                <label for="direccion"><b>Dirección</b></label>
                 <p>{{ $proveedor->direccion }}</p>
             </div>
             <div class="form-group">
-                <label for="responsable">Responsable</label>
+                <label for="responsable"><b>Responsable</b></label>
                 <p>{{ $proveedor->responsable }}</p>
+            </div>
+            <div class="form-group">
+                <label for="sucursal"><b>Sucursal(es)</b></label>
+                <ul>
+                    @foreach ($proveedor->sucursales as $sucursal)
+                        <li>{{ $sucursal->nombre }}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
         <div class="modal-footer">

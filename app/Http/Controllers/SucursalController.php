@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proveedor;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class SucursalController extends Controller
      */
     public function create()
     {
-        return view('sucursal.sucursalCreate');
+        $proveedores = Proveedor::all();
+        return view('sucursal.sucursalCreate', compact('proveedores'));
     }
 
     /**
@@ -43,7 +45,8 @@ class SucursalController extends Controller
             'encargado' => 'max:255',
         ]);
 
-        Sucursal::create($request->all());
+        $sucursal = Sucursal::create($request->all());
+        $sucursal->proveedores()->attach($request->proveedor_id);
 
         return redirect('/sucursal');
     }
@@ -67,7 +70,8 @@ class SucursalController extends Controller
      */
     public function edit(Sucursal $sucursal)
     {
-        return view('sucursal.sucursalEdit', compact('sucursal'));
+        $proveedores = Proveedor::all();
+        return view('sucursal.sucursalEdit', compact('sucursal', 'proveedores'));
     }
 
     /**
@@ -86,8 +90,9 @@ class SucursalController extends Controller
             'encargado' => 'max:255',
         ]);
 
-        Sucursal::where('id', $sucursal->id)->update($request->except('_token', '_method'));
+        Sucursal::where('id', $sucursal->id)->update($request->except('_token', '_method', 'proveedor_id'));
 
+        $sucursal->proveedores()->sync($request->proveedor_id);
         return redirect('/sucursal');
     }
 
@@ -99,6 +104,9 @@ class SucursalController extends Controller
      */
     public function destroy(Sucursal $sucursal)
     {
+        /* Primero quito los proveedores asociados a la sucursal*/
+        $sucursal->proveedores()->detach();
+        /* Después elimino el registro de la sucursal */
         $sucursal->delete();
 
         return redirect('/sucursal');

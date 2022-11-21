@@ -9,28 +9,28 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input class="form-control" type="text" name="nombre" id="nombre" value={{ $nombre ?? old('nombre') }}>
+                        <input class="form-control" type="text" name="nombre" id="nombre" required value={{ $nombre ?? old('nombre') }}>
                         @error('nombre')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo</label>
-                        <input class="form-control" type="email" name="correo" id="correo" value={{ $correo ?? old('correo') }}>
+                        <input class="form-control" type="email" name="correo" id="correo" required value={{ $correo ?? old('correo') }}>
                         @error('correo')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono</label>
-                        <input class="form-control" type="tel" name="telefono" id="telefono" value={{ $telefono ?? old('telefono') }}>
+                        <input class="form-control" type="tel" name="telefono" id="telefono" required value={{ $telefono ?? old('telefono') }}>
                         @error('telefono')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="direccion">Dirección</label>
-                        <input class="form-control" type="text" name="direccion" id="direccion" value={{ $direccion ?? old('direccion') }}>
+                        <input class="form-control" type="text" name="direccion" id="direccion" required value={{ $direccion ?? old('direccion') }}>
                         @error('direccion')
                         <i>{{ $message }}</i>
                         @enderror

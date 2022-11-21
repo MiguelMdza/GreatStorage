@@ -11,28 +11,28 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input class="form-control" type="text" name="nombre" id="nombre" value="{{ old('nombre') ?? $proveedor->nombre }}">
+                        <input class="form-control" type="text" name="nombre" id="nombre" required value="{{ old('nombre') ?? $proveedor->nombre }}">
                         @error('nombre')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo</label>
-                        <input class="form-control" type="email" name="correo" id="correo" value="{{ old('correo') ?? $proveedor->correo }}">
+                        <input class="form-control" type="email" name="correo" id="correo" required value="{{ old('correo') ?? $proveedor->correo }}">
                         @error('correo')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono</label>
-                        <input class="form-control" type="tel" name="telefono" id="telefono" value="{{ old('telefono') ?? $proveedor->telefono }}">
+                        <input class="form-control" type="tel" name="telefono" id="telefono" required value="{{ old('telefono') ?? $proveedor->telefono }}">
                         @error('telefono')
                         <i>{{ $message }}</i>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="direccion">Dirección</label>
-                        <input class="form-control" type="text" name="direccion" id="direccion" value="{{ old('direccion') ?? $proveedor->direccion }}">
+                        <input class="form-control" type="text" name="direccion" id="direccion" required value="{{ old('direccion') ?? $proveedor->direccion }}">
                         @error('direccion')
                         <i>{{ $message }}</i>
                         @enderror
