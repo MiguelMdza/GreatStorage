@@ -102,6 +102,9 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedor)
     {
+        /* Primero quito las sucursales asociados al proveedor*/
+        $proveedor->sucursales()->detach();
+        /* Después elimino el registro del proveedor */
         $proveedor->delete();
 
         return redirect('/proveedor');

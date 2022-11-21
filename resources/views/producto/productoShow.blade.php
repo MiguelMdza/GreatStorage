@@ -6,19 +6,19 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre"><b>Nombre</b></label>
                     <p>{{ $producto->nombre }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción</label>
+                    <label for="descripcion"><b>Descripción</b></label>
                     <p>{{ $producto->descripcion }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="precio">Precio</label>
+                    <label for="precio"><b>Precio</b></label>
                     <p>{{ $producto->precio }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="proveedor_id">Proveedor</label>
+                    <label for="proveedor_id"><b>Proveedor</b></label>
                     <p>{{ $producto->proveedor->nombre }}</p>
                 </div>
             </div>
