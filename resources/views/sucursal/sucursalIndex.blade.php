@@ -9,7 +9,8 @@
                             <h2 style="color: #fff">Lista de <b>Sucursales</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="/sucursal/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>Añadir Sucursal</a>
+                            <a href="/sucursal/create" class="btn btn-success"><i
+                                    class="material-icons">&#xE147;</i>Añadir Sucursal</a>
                         </div>
                     </div>
                 </div>
@@ -27,26 +28,30 @@
                     </thead>
                     <tbody>
                         @foreach ($sucursals as $sucursal)
-                        <tr>
-                            <td>{{ $sucursal->id }}</td>
-                            <td>
-                                <a href="/sucursal/{{ $sucursal->id }}">
-                                    {{ $sucursal->nombre }}
-                            </td>
-                            <td>{{ $sucursal->direccion }}</td>
-                            <td>{{ $sucursal->telefono }}</td>
-                            <td>{{ $sucursal->encargado }}</td>
-                            <td>
-                                <a href="/sucursal/{{ $sucursal->id }}/edit">Editar</a>
-                            </td>
-                            <td>
-                                <form action="/sucursal/{{ $sucursal->id }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="submit" value="Eliminar">
-                                </form>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>{{ $sucursal->id }}</td>
+                                <td>
+                                    <a href="/sucursal/{{ $sucursal->id }}">
+                                        {{ $sucursal->nombre }}
+                                </td>
+                                <td>{{ $sucursal->direccion }}</td>
+                                <td>{{ $sucursal->telefono }}</td>
+                                <td>{{ $sucursal->encargado }}</td>
+                                <td>
+                                    @can('update', $sucursal)
+                                        <a href="/sucursal/{{ $sucursal->id }}/edit">Editar</a>
+                                    @endcan
+                                </td>
+                                <td>
+                                    @can('delete', $sucursal)
+                                        <form action="/sucursal/{{ $sucursal->id }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="Eliminar">
+                                        </form>
+                                    @endcan
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
