@@ -16,7 +16,10 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        $sucursals = Sucursal::all();
+        /* $sucursals = Sucursal::all(); */
+        //resolver problema de N+1 consultas
+        $sucursals = Sucursal::with('user', 'proveedores')->get();
+
         return view('sucursal.sucursalIndex', compact('sucursals'));
     }
 
@@ -72,6 +75,9 @@ class SucursalController extends Controller
      */
     public function edit(Sucursal $sucursal)
     {
+        //permiso de policy
+        $this->authorize('update', $sucursal);
+
         $proveedores = Proveedor::all();
         return view('sucursal.sucursalEdit', compact('sucursal', 'proveedores'));
     }
@@ -106,6 +112,8 @@ class SucursalController extends Controller
      */
     public function destroy(Sucursal $sucursal)
     {
+        //permiso de policy
+        $this->authorize('delete', $sucursal);
         /* Primero quito los proveedores asociados a la sucursal*/
         $sucursal->proveedores()->detach();
         /* Después elimino el registro de la sucursal */
