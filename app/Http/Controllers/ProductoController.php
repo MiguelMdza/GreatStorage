@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\ProductoImage;
 
 use Illuminate\Http\Request;
 
@@ -47,7 +48,19 @@ class ProductoController extends Controller
             'proveedor_id' => 'required',
         ]);
 
-        Producto::create($request->all());
+        $producto = Producto::create($request->all());
+
+        //Archivos
+        if ($request->file('productoImage')->isValid())
+        {
+            $ubicacion = $request->productoImage->store('public');
+            $productoImage = new ProductoImage();
+            $productoImage->ubicacion = $ubicacion;
+            $productoImage->nombre_original = $request->productoImage->getClientOriginalName();
+            $productoImage->mime = '';
+
+            $producto->productoImage()->save($productoImage);
+        }
 
         return redirect('/producto');
     }
