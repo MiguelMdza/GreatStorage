@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proveedor;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SucursalController extends Controller
 {
@@ -45,6 +46,7 @@ class SucursalController extends Controller
             'encargado' => 'max:255',
         ]);
 
+        $request->merge(['user_id' => Auth::id()]);
         $sucursal = Sucursal::create($request->all());
         $sucursal->proveedores()->attach($request->proveedor_id);
 

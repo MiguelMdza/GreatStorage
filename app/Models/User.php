@@ -58,4 +58,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //un usuario tiene muchas sucursales
+    public function sucursales()
+    {
+        return $this->hasMany(Sucursal::class);
+    }
 }

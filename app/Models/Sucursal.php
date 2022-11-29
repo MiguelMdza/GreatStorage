@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sucursal extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre','direccion','telefono', 'encargado'];
+    protected $fillable = ['nombre', 'user_id', 'direccion', 'telefono', 'encargado'];
     public $timestamps = false;
 
     //Sucursal puede tener muchos Proovedores
@@ -16,5 +16,11 @@ class Sucursal extends Model
     {
         //belongsToMany es para relación M:N
         return $this->belongsToMany(Proveedor::class);
+    }
+
+    //una sucursal pertenece a un usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
