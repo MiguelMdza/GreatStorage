@@ -20,6 +20,7 @@ class SucursalController extends Controller
         //resolver problema de N+1 consultas
         $sucursals = Sucursal::with('user', 'proveedores')->get();
 
+
         return view('sucursal.sucursalIndex', compact('sucursals'));
     }
 
@@ -120,5 +121,26 @@ class SucursalController extends Controller
         $sucursal->delete();
 
         return redirect('/sucursal');
+    }
+
+    public function papelera()
+    {
+        $sucursals = Sucursal::onlyTrashed()->get();
+
+        return view('sucursal.sucursalPapelera', compact('sucursals'));
+    }
+
+    public function recuperar($sucursal_id)
+    {
+        Sucursal::withTrashed()->find($sucursal_id)->restore();
+
+        return redirect('/papelera-sucursal');
+    }
+
+    public function forceDelete($sucursal_id)
+    {
+        Sucursal::withTrashed()->find($sucursal_id)->forceDelete();
+
+        return redirect('/papelera-sucursal');
     }
 }

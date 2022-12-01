@@ -37,4 +37,8 @@ Route::middleware([
     Route::resource('producto', ProductoController::class);
     Route::resource('proveedor', ProveedorController::class);
     Route::resource('sucursal', SucursalController::class);
+    //rutas para la papelera de sucursal
+    Route::get('papelera-sucursal', [SucursalController::class, 'papelera']);
+    Route::get('/papelera-sucursal/{sucursal_id}/recuperar', [SucursalController::class, 'recuperar']);
+    Route::delete('/papelera-sucursal/{sucursal_id}/eliminar', [SucursalController::class, 'forceDelete']);
 });

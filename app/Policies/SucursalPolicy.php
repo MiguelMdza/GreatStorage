@@ -79,7 +79,8 @@ class SucursalPolicy
      */
     public function restore(User $user, Sucursal $sucursal)
     {
-        //
+        //solo el usuario que creó la sucursal podrá restaurarla
+        return $user->id == $sucursal->user_id;
     }
 
     /**
@@ -91,6 +92,7 @@ class SucursalPolicy
      */
     public function forceDelete(User $user, Sucursal $sucursal)
     {
-        //
+        //solo el usuario que creó la sucursal podrá eliminarla completamente
+        return $user->id == $sucursal->user_id;
     }
 }
