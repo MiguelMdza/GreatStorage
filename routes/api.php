@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+//retorna un JSON con la información de la tabla proveedores
+Route::get('/proveedores', function()
+{
+    return Proveedor::all();
 });
