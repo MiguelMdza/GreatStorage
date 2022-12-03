@@ -63,7 +63,7 @@ class ProductoController extends Controller
             $producto->productoImages()->save($productoImage);
         }
 
-        return redirect('/producto');
+        return redirect('/producto')->with('notificacion', 'Producto creado correctamente.');
     }
 
     /**
@@ -131,7 +131,7 @@ class ProductoController extends Controller
 
         Producto::where('id', $producto->id)->update($request->except('_token', '_method', 'productoImage'));
 
-        return redirect('/producto');
+        return redirect('/producto')->with('notificacion', 'Producto editado correctamente.');
     }
 
     /**
@@ -157,6 +157,6 @@ class ProductoController extends Controller
 
         $producto->delete();
 
-        return redirect('/producto');
+        return redirect('/producto')->with('notificacion', 'Proveedor eliminado correctamente.');
     }
 }
