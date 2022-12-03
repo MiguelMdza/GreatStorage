@@ -1,4 +1,4 @@
-<x-plantilla tab="GreatStorage - Sucursales" titulo="GreatStorage - Sucursales">
+<x-plantilla tab="GreatStorage - Recuperar Sucursales" titulo="GreatStorage - Recuperar Sucursales">
 
     <div class="container-xl">
         <div class="table-responsive">
@@ -9,13 +9,10 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2 style="color: #fff">Lista de <b>Sucursales</b></h2>
+                            <h2 style="color: #fff">Papelera de <b>Sucursales</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="/sucursal/create" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i>Añadir Sucursal</a>
-                            <a href="papelera-sucursal" class="btn btn-secondary"><i
-                                class="bi bi-trash3"></i>Papelera</a>
+                            <a href="/sucursal" class="btn btn-secondary"><i class="bi bi-trash3"></i>Regresar</a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +24,7 @@
                             <th>Dirección</th>
                             <th>Teléfono</th>
                             <th>Encargado</th>
-                            <th>Editar</th>
+                            <th>Recuperar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
@@ -35,26 +32,19 @@
                         @foreach ($sucursals as $sucursal)
                             <tr>
                                 <td>{{ $sucursal->id }}</td>
-                                <td>
-                                    <a href="/sucursal/{{ $sucursal->id }}">
-                                        {{ $sucursal->nombre }}
-                                </td>
+                                <td>{{ $sucursal->nombre }}</td>
                                 <td>{{ $sucursal->direccion }}</td>
                                 <td>{{ $sucursal->telefono }}</td>
                                 <td>{{ $sucursal->encargado }}</td>
                                 <td>
-                                    @can('update', $sucursal)
-                                        <a href="/sucursal/{{ $sucursal->id }}/edit">Editar</a>
-                                    @endcan
+                                    <a href="/papelera-sucursal/{{ $sucursal->id }}/recuperar">Recuperar</a>
                                 </td>
                                 <td>
-                                    @can('delete', $sucursal)
-                                        <form action="/sucursal/{{ $sucursal->id }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" value="Eliminar">
-                                        </form>
-                                    @endcan
+                                    <form action="/papelera-sucursal/{{ $sucursal->id }}/eliminar" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="submit" value="Eliminar">
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proveedor;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SucursalController extends Controller
 {
@@ -15,7 +16,11 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        $sucursals = Sucursal::all();
+        /* $sucursals = Sucursal::all(); */
+        //resolver problema de N+1 consultas
+        $sucursals = Sucursal::with('user', 'proveedores')->get();
+
+
         return view('sucursal.sucursalIndex', compact('sucursals'));
     }
 
@@ -45,10 +50,11 @@ class SucursalController extends Controller
             'encargado' => 'max:255',
         ]);
 
+        $request->merge(['user_id' => Auth::id()]);
         $sucursal = Sucursal::create($request->all());
         $sucursal->proveedores()->attach($request->proveedor_id);
 
-        return redirect('/sucursal');
+        return redirect('/sucursal')->with('notificacion', 'Sucursal creada correctamente.');
     }
 
     /**
@@ -70,6 +76,9 @@ class SucursalController extends Controller
      */
     public function edit(Sucursal $sucursal)
     {
+        //permiso de policy
+        $this->authorize('update', $sucursal);
+
         $proveedores = Proveedor::all();
         return view('sucursal.sucursalEdit', compact('sucursal', 'proveedores'));
     }
@@ -93,7 +102,7 @@ class SucursalController extends Controller
         Sucursal::where('id', $sucursal->id)->update($request->except('_token', '_method', 'proveedor_id'));
 
         $sucursal->proveedores()->sync($request->proveedor_id);
-        return redirect('/sucursal');
+        return redirect('/sucursal')->with('notificacion', 'Sucursal editada correctamente.');
     }
 
     /**
@@ -104,11 +113,34 @@ class SucursalController extends Controller
      */
     public function destroy(Sucursal $sucursal)
     {
+        //permiso de policy
+        $this->authorize('delete', $sucursal);
         /* Primero quito los proveedores asociados a la sucursal*/
         $sucursal->proveedores()->detach();
         /* Después elimino el registro de la sucursal */
         $sucursal->delete();
 
-        return redirect('/sucursal');
+        return redirect('/sucursal')->with('notificacion', 'Sucursal borrada correctamente, puedes recuperarla desde la papelera.');
+    }
+
+    public function papelera()
+    {
+        $sucursals = Sucursal::onlyTrashed()->get();
+
+        return view('sucursal.sucursalPapelera', compact('sucursals'));
+    }
+
+    public function recuperar($sucursal_id)
+    {
+        Sucursal::withTrashed()->find($sucursal_id)->restore();
+
+        return redirect('/papelera-sucursal')->with('notificacion', 'Sucursal restaurada correctamente. Por favor vuelve a añadir sus proveedores.');
+    }
+
+    public function forceDelete($sucursal_id)
+    {
+        Sucursal::withTrashed()->find($sucursal_id)->forceDelete();
+
+        return redirect('/papelera-sucursal')->with('notificacion', 'Sucursal eliminada para siempre correctamente.');
     }
 }

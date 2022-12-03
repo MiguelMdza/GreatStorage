@@ -3,6 +3,9 @@
 
     <div class="container-xl">
         <div class="table-responsive">
+            {{-- ALERTA DE ÉXITO --}}
+            <x-notificacion></x-notificacion>
+            
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
