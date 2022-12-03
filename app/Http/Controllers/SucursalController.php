@@ -54,7 +54,7 @@ class SucursalController extends Controller
         $sucursal = Sucursal::create($request->all());
         $sucursal->proveedores()->attach($request->proveedor_id);
 
-        return redirect('/sucursal');
+        return redirect('/sucursal')->with('notificacion', 'Sucursal creada correctamente.');
     }
 
     /**
@@ -102,7 +102,7 @@ class SucursalController extends Controller
         Sucursal::where('id', $sucursal->id)->update($request->except('_token', '_method', 'proveedor_id'));
 
         $sucursal->proveedores()->sync($request->proveedor_id);
-        return redirect('/sucursal');
+        return redirect('/sucursal')->with('notificacion', 'Sucursal editada correctamente.');
     }
 
     /**
@@ -120,7 +120,7 @@ class SucursalController extends Controller
         /* Después elimino el registro de la sucursal */
         $sucursal->delete();
 
-        return redirect('/sucursal');
+        return redirect('/sucursal')->with('notificacion', 'Sucursal borrada correctamente, puedes recuperarla desde la papelera.');
     }
 
     public function papelera()
@@ -134,13 +134,13 @@ class SucursalController extends Controller
     {
         Sucursal::withTrashed()->find($sucursal_id)->restore();
 
-        return redirect('/papelera-sucursal');
+        return redirect('/papelera-sucursal')->with('notificacion', 'Sucursal restaurada correctamente. Por favor vuelve a añadir sus proveedores.');
     }
 
     public function forceDelete($sucursal_id)
     {
         Sucursal::withTrashed()->find($sucursal_id)->forceDelete();
 
-        return redirect('/papelera-sucursal');
+        return redirect('/papelera-sucursal')->with('notificacion', 'Sucursal eliminada para siempre correctamente.');
     }
 }

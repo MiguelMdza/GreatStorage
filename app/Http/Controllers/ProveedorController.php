@@ -47,7 +47,7 @@ class ProveedorController extends Controller
 
         Proveedor::create($request->all());
 
-        return redirect('/proveedor');
+        return redirect('/proveedor')->with('notificacion', 'Proveedor creado correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class ProveedorController extends Controller
 
         Proveedor::where('id', $proveedor->id)->update($request->except('_token', '_method'));
 
-        return redirect('/proveedor');
+        return redirect('/proveedor')->with('notificacion', 'Proveedor editado correctamente.');;
     }
 
     /**
@@ -107,6 +107,6 @@ class ProveedorController extends Controller
         /* Después elimino el registro del proveedor */
         $proveedor->delete();
 
-        return redirect('/proveedor');
+        return redirect('/proveedor')->with('notificacion', 'Proveedor eliminado correctamente.');;
     }
 }

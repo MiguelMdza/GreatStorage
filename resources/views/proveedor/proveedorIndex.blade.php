@@ -2,6 +2,9 @@
     
     <div class="container-xl">
         <div class="table-responsive">
+            {{-- ALERTA DE ÉXITO --}}
+            <x-notificacion></x-notificacion>
+            
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
@@ -10,6 +13,7 @@
                         </div>
                         <div class="col-sm-6">
                             <a href="/proveedor/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>Añadir Proveedor</a>
+                            <a href="/api/proveedores" class="btn btn-secondary"><i class="bi bi-trash3"></i>JSON</a>
                         </div>
                     </div>
                 </div>
