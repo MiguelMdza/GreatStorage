@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\ProductoImage;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -47,7 +49,19 @@ class ProductoController extends Controller
             'proveedor_id' => 'required',
         ]);
 
-        Producto::create($request->all());
+        $producto = Producto::create($request->all());
+
+        //Archivos
+        if ($request->file('productoImage')->isValid())
+        {
+            $ubicacion = $request->productoImage->store('public');
+            $productoImage = new ProductoImage();
+            $productoImage->ubicacion = $ubicacion;
+            $productoImage->nombre_original = $request->productoImage->getClientOriginalName();
+            $productoImage->mime = '';
+
+            $producto->productoImages()->save($productoImage);
+        }
 
         return redirect('/producto')->with('notificacion', 'Producto creado correctamente.');
     }
@@ -90,7 +104,32 @@ class ProductoController extends Controller
             'precio' => 'required|numeric',
         ]);
 
-        Producto::where('id', $producto->id)->update($request->except('_token', '_method'));
+        $count=0;
+
+        foreach($producto->productoImages as $productoImage)
+        {
+            $count++;
+            $file = ProductoImage::whereId($productoImage->id)->firstOrFail();
+            //En caso de que se suba más de un archivo, se eliminarán todos sus archivos relacionados
+            if($count > 0){
+                unlink(public_path(Storage::url($file->ubicacion)));
+                $file->delete($file->id);
+            }
+        }
+
+        //Archivos
+        if ($request->file('productoImage')->isValid())
+        {
+            $ubicacion = $request->productoImage->store('public');
+            $productoImage = new ProductoImage();
+            $productoImage->ubicacion = $ubicacion;
+            $productoImage->nombre_original = $request->productoImage->getClientOriginalName();
+            $productoImage->mime = '';
+
+            $producto->productoImages()->save($productoImage);
+        }
+
+        Producto::where('id', $producto->id)->update($request->except('_token', '_method', 'productoImage'));
 
         return redirect('/producto')->with('notificacion', 'Producto editado correctamente.');
     }
@@ -103,6 +142,19 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $count=0;
+
+        foreach($producto->productoImages as $productoImage)
+        {
+            $count++;
+            $file = ProductoImage::whereId($productoImage->id)->firstOrFail();
+            //En caso de que se suba más de un archivo, se eliminarán todos sus archivos relacionados
+            if($count > 0){
+                unlink(public_path(Storage::url($file->ubicacion)));
+                $file->delete($file->id);
+            }
+        }
+
         $producto->delete();
 
         return redirect('/producto')->with('notificacion', 'Proveedor eliminado correctamente.');

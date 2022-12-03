@@ -10,7 +10,7 @@ class Sucursal extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $fillable = ['nombre', 'user_id', 'direccion', 'telefono', 'encargado'];
     public $timestamps = false;
 

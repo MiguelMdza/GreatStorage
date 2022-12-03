@@ -1,7 +1,7 @@
 <x-plantilla titulo="GreatStorage - Crear Producto" tab="GreatStorage - Crear Producto">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/producto" method="POST">
+            <form action="/producto" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h4 class="modal-title">Añadir Producto</h4>
@@ -39,6 +39,10 @@
                         @error('proveedor_id')
                             <i>{{ $message }}</i>
                         @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="productoImage"><b>Imagen</b></label>
+                        <input class="form-control" type="file" name="productoImage" accept="image/png, image/jpeg">
                     </div>
                 </div>
                 <div class="modal-footer">
